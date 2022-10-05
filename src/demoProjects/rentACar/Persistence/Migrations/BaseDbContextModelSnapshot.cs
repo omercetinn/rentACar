@@ -265,6 +265,7 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
+
             modelBuilder.Entity("Domain.Entities.Model", b =>
                 {
                     b.HasOne("Domain.Entities.Brand", "Brand")
