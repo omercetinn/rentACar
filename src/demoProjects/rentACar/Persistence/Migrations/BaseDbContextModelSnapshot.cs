@@ -287,6 +287,81 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("Models");
                 });
+
+            modelBuilder.Entity("Domain.Entities.Model", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int")
+                        .HasColumnName("BrandId");
+
+                    b.Property<decimal>("DailyPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("DailyPrice");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ImageUrl");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.ToTable("Models", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrandId = 1,
+                            DailyPrice = 1500m,
+                            ImageUrl = "",
+                            Name = "Seris 4"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrandId = 1,
+                            DailyPrice = 1300m,
+                            ImageUrl = "",
+                            Name = "Seris 3"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrandId = 2,
+                            DailyPrice = 1000m,
+                            ImageUrl = "",
+                            Name = "A180"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Model", b =>
+                {
+                    b.HasOne("Domain.Entities.Brand", "Brand")
+                        .WithMany("Models")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Brand", b =>
+                {
+                    b.Navigation("Models");
+                });
 #pragma warning restore 612, 618
         }
     }
