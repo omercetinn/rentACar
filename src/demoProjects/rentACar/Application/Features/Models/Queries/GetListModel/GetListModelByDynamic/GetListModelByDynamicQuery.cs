@@ -35,7 +35,7 @@ namespace Application.Features.Models.Queries.GetListModel.GetListModelByDynamic
             {
                 IPaginate<Model> models = await _modelRepository.GetListByDynamicAsync(request.Dynamic, //dinamik olarak arama yapabiliyor, filtreleme yapabiliyor
                                               include:
-                                              m => m.Include(c => c.Brand),//Include ile koin işlemi yapıyoruz. Burada araba modellerini markalar ile joinledik
+                                              m => m.Include(c => c.Brand),//Include ile join işlemi yapıyoruz. Burada araba modellerini markalar ile joinledik
                                               index: request.PageRequest.Page,
                                               size: request.PageRequest.PageSize
                                               );
